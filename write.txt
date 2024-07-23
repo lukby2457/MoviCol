@@ -1,3 +1,7 @@
+O : 완료
+? : 일부 구현
+/ : 수정 필요
+
 필수 구현
 1. jQuery 사용x
 2. API 가져오기 O
@@ -5,7 +9,7 @@
     카드에는 title, overview, poster-path, vote-average포함 O
     카드 클릭시 alert에 id 표시
 4. 검색 UI구현
-    제목이 input의 value값을 포함하면 그 영화 카드만 표시
+    제목이 input의 value값을 포함하면 그 영화 카드만 표시 /
     버튼 클릭 시 작동
 5. 문법
     const, let만 사용
