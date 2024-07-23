@@ -1,11 +1,111 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      width: 1900px;
+      margin: 0 auto;
+      background-color: #212121;
+    }
+    header {
+      background-color: yellow;
+    }
+
+    .inputForm {
+      border-top: 1px solid black;
+    }
+
+    section {
+      background-color: lightgreen;
+    }
+
+    .card {
+      border-bottom: 1px solid black;
+      cursor: pointer;
+    }
+  </style>
+  <script>
+    const titleArr = [];
+    const idArr = [];
+
+    window.onload = function() {
+      const cardList = document.querySelector('.cardList');
+      const options = {
+        method: 'GET',
+        headers: {
+          accept: 'application/json',
+          Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIzNjI1Mzc5NDZmOGEwYjIxZjFiMWNjZGQwZjk0MDZkNSIsIm5iZiI6MTcyMTcyNDg4OC40ODcxNzcsInN1YiI6IjY2OWY2ZWZiNGI0OTYxOGI0OTJlN2I4YiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.mYKz6yxy0yiHtcLr1pmMFR7VeNziqwLVgBTLM-SSdNA'
+        }
+      };
+    
+      (function loadCard() {
+        fetch('https://api.themoviedb.org/3/movie/top_rated?language=en-US&page=1', options)
+          .then(response => response.json())
+          .then(datas => {
+            datas.results.forEach(data => {
+              const imgPath = 'https://image.tmdb.org/t/p/w500'
+              let tempHtml = `
+                <div class="card" id="${data.id}">
+                  <img src="${imgPath + data.poster_path}">
+                  <h4>${data.original_title}</h4>
+                  <p>
+                    ${data.overview}
+                  </p>
+                  <p>rating : ${data.vote_average}</p>
+                </div>
+              `;
+      
+              cardList.innerHTML += tempHtml;
+
+              titleArr.push(data.original_title);
+              idArr.push(data.id);
+            });
+          })
+          .catch(err => console.error(err));
+      })();
+
+      const inputButton = document.getElementById('inputButton');
+      const index = document.getElementById('index');
+
+      inputButton.addEventListener("click", (e) => {
+        let indexFind = String(index.value).toLowerCase();
+        
+        for(let i = 0; i < titleArr.length; i++) {
+          let title = String(titleArr[i]).toLowerCase();
+
+          if(title.includes(indexFind)) {
+            document.getElementById(`${idArr[i]}`).style.display = 'block';
+          }
+          else {
+            document.getElementById(`${idArr[i]}`).style.display = 'none';
+          }
+        }
+      });
+    }
+  </script>
   <title>MoviCol</title>
 </head>
+
 <body>
-  
+  <header>
+    <h1>MoviCol</h1>
+
+    <div class="inputForm">
+      <input type="text" id="index">
+      <button id="inputButton">검색</button>
+    </div>
+  </header>
+
+  <section class="cardList">
+  </section>
 </body>
+
 </html>
