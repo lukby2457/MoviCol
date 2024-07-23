@@ -1,0 +1,39 @@
+필수 구현
+1. jQuery 사용x
+2. API 가져오기 O
+3. 영화정보 카드 리스트 UI 구현
+    카드에는 title, overview, poster-path, vote-average포함 O
+    카드 클릭시 alert에 id 표시
+4. 검색 UI구현
+    제목이 input의 value값을 포함하면 그 영화 카드만 표시
+    버튼 클릭 시 작동
+5. 문법
+    const, let만 사용
+    화살표 함수 1개 이상
+    배열 메소드 2개 이상 filter, forEach (O)
+    DOM 제어 2개 이상
+
+구성
+<header>
+    h1
+        MoviCol
+    
+    검색 div
+        안에 input과 button
+
+    h1은 왼쪽, 검색은 오른쪽 배치
+</header>
+
+<section class="cardList">
+    <div class="card" id="${data.id}">
+        <img src="${imgPath + data.poster_path}">
+        <h4>${data.original_title}</h4>
+        <p>
+        ${data.overview}
+        </p>
+        <p>rating : ${data.vote_average}</p>
+    </div>
+
+    flex 적용
+    한줄에 4개 배치, body width는 1900, card width는 400, height는 추후 결정
+</section>
