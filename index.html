@@ -15,6 +15,7 @@
       margin: 0 auto;
       background-color: #212121;
     }
+
     header {
       background-color: yellow;
     }
@@ -24,10 +25,11 @@
     }
 
     section {
-      background-color: lightgreen;
+      background-color: lightyellow;
     }
 
     .card {
+      background-color: lightgreen;
       border-bottom: 1px solid black;
       cursor: pointer;
     }
@@ -36,7 +38,44 @@
     const titleArr = [];
     const idArr = [];
 
-    window.onload = function() {
+    function createCard(object) {
+      const imgPath = 'https://image.tmdb.org/t/p/w500';
+
+      const card = document.createElement('div');
+      card.className = 'card';
+      card.id = `${object.id}`;
+      card.innerHTML = `
+        <img src="${imgPath + object.poster_path}">
+        <h4>${object.original_title}</h4>
+        <p>
+          ${object.overview}
+        </p>
+        <p>rating : ${object.vote_average}</p>
+      `;
+
+      card.addEventListener("click", () => {
+        alert(`영화 id : ${object.id}`);
+      });
+
+      return card;
+    };
+
+    function changeDisplay(index, arr1, arr2) {
+      let indexFind = String(index.value).toLowerCase();
+
+      for (let i = 0; i < arr1.length; i++) {
+        let title = String(arr1[i]).toLowerCase();
+
+        if (title.includes(indexFind)) {
+          document.getElementById(`${arr2[i]}`).style.display = 'block';
+        }
+        else {
+          document.getElementById(`${arr2[i]}`).style.display = 'none';
+        }
+      }
+    };
+
+    window.onload = function () {
       const cardList = document.querySelector('.cardList');
       const options = {
         method: 'GET',
@@ -45,25 +84,17 @@
           Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIzNjI1Mzc5NDZmOGEwYjIxZjFiMWNjZGQwZjk0MDZkNSIsIm5iZiI6MTcyMTcyNDg4OC40ODcxNzcsInN1YiI6IjY2OWY2ZWZiNGI0OTYxOGI0OTJlN2I4YiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.mYKz6yxy0yiHtcLr1pmMFR7VeNziqwLVgBTLM-SSdNA'
         }
       };
-    
+
       (function loadCard() {
         fetch('https://api.themoviedb.org/3/movie/top_rated?language=en-US&page=1', options)
           .then(response => response.json())
           .then(datas => {
-            datas.results.forEach(data => {
-              const imgPath = 'https://image.tmdb.org/t/p/w500'
-              let tempHtml = `
-                <div class="card" id="${data.id}">
-                  <img src="${imgPath + data.poster_path}">
-                  <h4>${data.original_title}</h4>
-                  <p>
-                    ${data.overview}
-                  </p>
-                  <p>rating : ${data.vote_average}</p>
-                </div>
-              `;
-      
-              cardList.innerHTML += tempHtml;
+            // filter를 사용하기 위해 추가
+            const filterData = datas.results.filter(movie => movie.vote_average > 7);
+
+            filterData.forEach(data => {
+              const card = createCard(data);
+              cardList.appendChild(card);
 
               titleArr.push(data.original_title);
               idArr.push(data.id);
@@ -76,19 +107,16 @@
       const index = document.getElementById('index');
 
       inputButton.addEventListener("click", (e) => {
-        let indexFind = String(index.value).toLowerCase();
-        
-        for(let i = 0; i < titleArr.length; i++) {
-          let title = String(titleArr[i]).toLowerCase();
-
-          if(title.includes(indexFind)) {
-            document.getElementById(`${idArr[i]}`).style.display = 'block';
-          }
-          else {
-            document.getElementById(`${idArr[i]}`).style.display = 'none';
-          }
-        }
+        changeDisplay(index, titleArr, idArr);
       });
+
+      index.addEventListener("keypress", (e) => {
+        let code = e.code;
+
+        if(code === 'Enter' || code === 'NumpadEnter') {
+          changeDisplay(index, titleArr, idArr);
+        }
+      })
     }
   </script>
   <title>MoviCol</title>

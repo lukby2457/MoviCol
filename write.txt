@@ -3,19 +3,19 @@ O : 완료
 / : 수정 필요
 
 필수 구현
-1. jQuery 사용x
+1. jQuery 사용x O
 2. API 가져오기 O
 3. 영화정보 카드 리스트 UI 구현
     카드에는 title, overview, poster-path, vote-average포함 O
-    카드 클릭시 alert에 id 표시
+    카드 클릭시 alert에 id 표시 O
 4. 검색 UI구현
-    제목이 input의 value값을 포함하면 그 영화 카드만 표시 /
-    버튼 클릭 시 작동
+    제목이 input의 value값을 포함하면 그 영화 카드만 표시 O
+    버튼 클릭 시 작동 O
 5. 문법
-    const, let만 사용
-    화살표 함수 1개 이상
-    배열 메소드 2개 이상 filter, forEach (O)
-    DOM 제어 2개 이상
+    const, let만 사용 O
+    화살표 함수 1개 이상 O
+    배열 메소드 2개 이상 filter(강제로 끼운 느낌 ㅠㅠ), forEach O
+    DOM 제어 2개 이상 O
 
 구성
 <header>
@@ -29,15 +29,10 @@ O : 완료
 </header>
 
 <section class="cardList">
-    <div class="card" id="${data.id}">
-        <img src="${imgPath + data.poster_path}">
-        <h4>${data.original_title}</h4>
-        <p>
-        ${data.overview}
-        </p>
-        <p>rating : ${data.vote_average}</p>
-    </div>
-
-    flex 적용
+    card는 flex 적용
     한줄에 4개 배치, body width는 1900, card width는 400, height는 추후 결정
 </section>
+
+window.onload 안에서는 즉시 실행 함수, 변수 지정이 동기로 돌아가나
+즉시 실행 함수에서는 비동기로 돌아가기 때문에 card 클래스를 찾아도
+길이가 0인 배열이 나올 수 있다
