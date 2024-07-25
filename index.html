@@ -15,29 +15,129 @@
       margin: 0 auto;
       background-color: #212121;
     }
+
     header {
-      background-color: yellow;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      /* background-color: yellow; */
+      margin-bottom: 25px;
+    }
+
+    header > h1 {
+      color: white;
+      padding: 10px 25px 0 25px;
     }
 
     .inputForm {
-      border-top: 1px solid black;
+      display: flex;
+      flex-direction: row;
+      padding: 10px 25px 0 25px;
     }
 
-    section {
-      background-color: lightgreen;
+    #index {
+      color: white;
+      font-size: 15px;
+      padding-left: 7px;
+      background-color: #212121;
+      border: 2px solid white;
+      border-right: 0;
+      width: 400px;
+      height: 30px;
+    }
+
+    #index:focus {
+      outline: none;
+    }
+
+    #inputButton {
+      background-color: #212121;
+      border: 2px solid white;
+      width: 50px;
+      color: white;
+      font-size: 15px;
+    }
+
+    .cardList {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: space-evenly;
     }
 
     .card {
-      border-bottom: 1px solid black;
+      color: white;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      border: 2px solid transparent;
+      width: 346px;
+      height: 855px;
+      /* background-color: lightgreen; */
+      margin-bottom: 25px;
       cursor: pointer;
+    }
+    .card:hover {
+      border: 2px solid white;
+      width: 346px;
+    }
+    .card img {
+      display: flex;
+      width: 100%;
+    }
+    .card h3 {
+      margin-top: 5px;
+      text-align: center;
     }
   </style>
   <script>
     const titleArr = [];
     const idArr = [];
 
-    window.onload = function() {
+    function createCard(object) {
+      const imgPath = 'https://image.tmdb.org/t/p/w500';
+
+      const card = document.createElement('div');
+      card.className = 'card';
+      card.id = `${object.id}`;
+      card.innerHTML = `
+        <div>
+          <img src="${imgPath + object.poster_path}">
+          <h3>${object.original_title}</h3>
+        </div>
+        <p>
+          ${object.overview}
+        </p>
+        <p>rating : ${object.vote_average}</p>
+      `;
+
+      card.addEventListener("click", () => {
+        alert(`영화 id : ${object.id}`);
+      });
+
+      return card;
+    };
+
+    function changeDisplay(index, arr1, arr2) {
+      let indexFind = String(index.value).toLowerCase();
+
+      for (let i = 0; i < arr1.length; i++) {
+        let title = String(arr1[i]).toLowerCase();
+
+        if (title.includes(indexFind)) {
+          document.getElementById(`${arr2[i]}`).style.display = 'flex';
+        }
+        else {
+          document.getElementById(`${arr2[i]}`).style.display = 'none';
+        }
+      }
+    };
+
+    window.onload = function () {
       const cardList = document.querySelector('.cardList');
+      const inputButton = document.getElementById('inputButton');
+      const index = document.getElementById('index');
       const options = {
         method: 'GET',
         headers: {
@@ -45,25 +145,17 @@
           Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIzNjI1Mzc5NDZmOGEwYjIxZjFiMWNjZGQwZjk0MDZkNSIsIm5iZiI6MTcyMTcyNDg4OC40ODcxNzcsInN1YiI6IjY2OWY2ZWZiNGI0OTYxOGI0OTJlN2I4YiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.mYKz6yxy0yiHtcLr1pmMFR7VeNziqwLVgBTLM-SSdNA'
         }
       };
-    
+
       (function loadCard() {
         fetch('https://api.themoviedb.org/3/movie/top_rated?language=en-US&page=1', options)
           .then(response => response.json())
           .then(datas => {
-            datas.results.forEach(data => {
-              const imgPath = 'https://image.tmdb.org/t/p/w500'
-              let tempHtml = `
-                <div class="card" id="${data.id}">
-                  <img src="${imgPath + data.poster_path}">
-                  <h4>${data.original_title}</h4>
-                  <p>
-                    ${data.overview}
-                  </p>
-                  <p>rating : ${data.vote_average}</p>
-                </div>
-              `;
-      
-              cardList.innerHTML += tempHtml;
+            // filter를 사용하기 위해 추가
+            const filterData = datas.results.filter(movie => movie.vote_average > 7);
+
+            filterData.forEach(data => {
+              const card = createCard(data);
+              cardList.appendChild(card);
 
               titleArr.push(data.original_title);
               idArr.push(data.id);
@@ -72,23 +164,17 @@
           .catch(err => console.error(err));
       })();
 
-      const inputButton = document.getElementById('inputButton');
-      const index = document.getElementById('index');
-
       inputButton.addEventListener("click", (e) => {
-        let indexFind = String(index.value).toLowerCase();
-        
-        for(let i = 0; i < titleArr.length; i++) {
-          let title = String(titleArr[i]).toLowerCase();
-
-          if(title.includes(indexFind)) {
-            document.getElementById(`${idArr[i]}`).style.display = 'block';
-          }
-          else {
-            document.getElementById(`${idArr[i]}`).style.display = 'none';
-          }
-        }
+        changeDisplay(index, titleArr, idArr);
       });
+
+      index.addEventListener("keypress", (e) => {
+        let code = e.code;
+
+        if(code === 'Enter' || code === 'NumpadEnter') {
+          changeDisplay(index, titleArr, idArr);
+        }
+      })
     }
   </script>
   <title>MoviCol</title>
@@ -99,9 +185,15 @@
     <h1>MoviCol</h1>
 
     <div class="inputForm">
-      <input type="text" id="index">
+      <input type="text" id="index" autofocus>
       <button id="inputButton">검색</button>
     </div>
+
+    <!-- <div>
+      <ul>
+        <li>home</li>
+      </ul>
+    </div> -->
   </header>
 
   <section class="cardList">
