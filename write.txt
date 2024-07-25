@@ -29,11 +29,9 @@ O : 완료
 </header>
 
 <section class="cardList">
-    card는 flex 적용
-    한줄에 4개 배치, body width는 1900, card width는 400, height는 추후 결정
-    flex-wrap 속성은 정렬된 요소들의 총 넓이가 부모 넓이 보다 클 때, 
-    이 요소들을 다음 줄에 이어서 정렬 해주는 기능.
-    이 속성은 부모요소에 display:flex; 와 함께 기재합니다.
+    card는 flex 적용 O
+    한줄에 5개 배치, body width는 1900, card width는 350, height는 추후 결정 O
+    img와 h3를 div로 묶어서 card는 space-between 적용
 </section>
 
 window.onload 안에서는 즉시 실행 함수, 변수 지정이 동기로 돌아가나
