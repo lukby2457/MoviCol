@@ -1,0 +1,84 @@
+const titleArr = [];
+const idArr = [];
+
+function createCard(object) {
+  const imgPath = 'https://image.tmdb.org/t/p/w500';
+
+  const card = document.createElement('div');
+  card.className = 'card';
+  card.id = `${object.id}`;
+  card.innerHTML = `
+        <div>
+          <img src="${imgPath + object.poster_path}">
+          <h2>${object.original_title}</h2>
+        </div>
+        <p class="overview">
+          ${object.overview}
+        </p>
+        <p class="rating">rating : ${object.vote_average}</p>
+      `;
+
+  card.addEventListener("click", () => {
+    alert(`영화 id : ${object.id}`);
+  });
+
+  return card;
+};
+
+function changeDisplay(index, arr1, arr2) {
+  let indexFind = String(index.value).toLowerCase();
+
+  for (let i = 0; i < arr1.length; i++) {
+    let title = String(arr1[i]).toLowerCase();
+
+    if (title.includes(indexFind)) {
+      document.getElementById(`${arr2[i]}`).style.display = 'flex';
+    }
+    else {
+      document.getElementById(`${arr2[i]}`).style.display = 'none';
+    }
+  }
+};
+
+window.onload = function () {
+  const cardList = document.querySelector('.cardList');
+  const inputButton = document.getElementById('inputButton');
+  const index = document.getElementById('index');
+  const options = {
+    method: 'GET',
+    headers: {
+      accept: 'application/json',
+      Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIzNjI1Mzc5NDZmOGEwYjIxZjFiMWNjZGQwZjk0MDZkNSIsIm5iZiI6MTcyMTcyNDg4OC40ODcxNzcsInN1YiI6IjY2OWY2ZWZiNGI0OTYxOGI0OTJlN2I4YiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.mYKz6yxy0yiHtcLr1pmMFR7VeNziqwLVgBTLM-SSdNA'
+    }
+  };
+
+  (function loadCard() {
+    fetch('https://api.themoviedb.org/3/movie/top_rated?language=en-US&page=1', options)
+      .then(response => response.json())
+      .then(datas => {
+        // filter를 사용하기 위해 추가
+        const filterData = datas.results.filter(movie => movie.vote_average > 7);
+
+        filterData.forEach(data => {
+          const card = createCard(data);
+          cardList.appendChild(card);
+
+          titleArr.push(data.original_title);
+          idArr.push(data.id);
+        });
+      })
+      .catch(err => console.error(err));
+  })();
+
+  inputButton.addEventListener("click", (e) => {
+    changeDisplay(index, titleArr, idArr);
+  });
+
+  index.addEventListener("keypress", (e) => {
+    let code = e.code;
+
+    if (code === 'Enter' || code === 'NumpadEnter') {
+      changeDisplay(index, titleArr, idArr);
+    }
+  })
+}
