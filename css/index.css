@@ -19,7 +19,7 @@ header {
 }
 
 header > h1 {
-  color: white;
+  color: #A1C4EB;
   padding: 10px 25px 0 25px;
 }
 
@@ -30,11 +30,11 @@ header > h1 {
 }
 
 #index {
-  color: white;
+  color: #A1C4EB;
   font-size: 15px;
   padding-left: 7px;
   background-color: #212121;
-  border: 2px solid white;
+  border: 2px solid #A1C4EB;
   border-right: 0;
   width: 400px;
   height: 30px;
@@ -45,11 +45,12 @@ header > h1 {
 }
 
 #inputButton {
-  background-color: #212121;
-  border: 2px solid white;
+  background-color: #A1C4EB;
+  border: 2px solid #A1C4EB;
   width: 50px;
-  color: white;
+  color: #212121;
   font-size: 15px;
+  font-weight: bolder;
 }
 
 .cardList {
@@ -61,8 +62,10 @@ header > h1 {
 
 .card {
   background-color: #111111;
+  border-radius: 15px;
+  overflow: hidden;
   /* background-color: #212121; */
-  color: white;
+  color: #FFFFFF;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -70,17 +73,19 @@ header > h1 {
   width: 346px;
   height: 850px;
   margin-bottom: 25px;
-  cursor: pointer;
 }
 .card:hover {
-  border: 2px solid white;
+  border: 2px solid #A1C4EB;
+  border-radius: 0;
   width: 346px;
+  cursor: pointer;
 }
 .card img {
   display: flex;
   width: 100%;
 }
 .card h2 {
+  color: #A1C4EB;
   margin-top: 5px;
   text-align: center;
 }
@@ -97,5 +102,6 @@ header > h1 {
 .rating {
   margin-top: 10px;
   margin-bottom: 5px;
-  margin-left: 5px;
+  margin-left: 10px;
+  color: #A1C4EB;
 }

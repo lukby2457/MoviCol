@@ -28,16 +28,26 @@ function createCard(object) {
 function changeDisplay(index, arr1, arr2) {
   let indexFind = String(index.value).toLowerCase();
 
-  for (let i = 0; i < arr1.length; i++) {
-    let title = String(arr1[i]).toLowerCase();
+  let merged = arr1.reduce((obj, title, id) => {
+    return {...obj, [title] : arr2[id]};
+  }, {});
+  // console.log(merged);
 
-    if (title.includes(indexFind)) {
-      document.getElementById(`${arr2[i]}`).style.display = 'flex';
+  let objectArr = Object.entries(merged);
+  // console.log(objectArr);
+
+  objectArr.forEach(data => {
+    // console.log(data[0], data[1]);
+    let title = String(data[0]).toLowerCase();
+    let id = data[1];
+
+    if(title.includes(indexFind)) {
+      document.getElementById(`${id}`).style.display = 'flex';
     }
     else {
-      document.getElementById(`${arr2[i]}`).style.display = 'none';
+      document.getElementById(`${id}`).style.display = 'none';
     }
-  }
+  })
 };
 
 window.onload = function () {
@@ -56,8 +66,7 @@ window.onload = function () {
     fetch('https://api.themoviedb.org/3/movie/top_rated?language=en-US&page=1', options)
       .then(response => response.json())
       .then(datas => {
-        // filter를 사용하기 위해 추가
-        const filterData = datas.results.filter(movie => movie.vote_average > 7);
+        const filterData = datas.results;
 
         filterData.forEach(data => {
           const card = createCard(data);
