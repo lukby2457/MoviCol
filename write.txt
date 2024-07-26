@@ -14,7 +14,7 @@ O : 완료
 5. 문법
     const, let만 사용 O
     화살표 함수 1개 이상 O
-    배열 메소드 2개 이상 filter(강제로 끼운 느낌 ㅠㅠ), forEach O
+    배열 메소드 2개 이상 reduce, forEach O
     DOM 제어 2개 이상 O
 
 구성

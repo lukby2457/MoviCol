@@ -66,9 +66,9 @@ window.onload = function () {
     fetch('https://api.themoviedb.org/3/movie/top_rated?language=en-US&page=1', options)
       .then(response => response.json())
       .then(datas => {
-        const filterData = datas.results;
+        const dataArr = datas.results;
 
-        filterData.forEach(data => {
+        dataArr.forEach(data => {
           const card = createCard(data);
           cardList.appendChild(card);
 

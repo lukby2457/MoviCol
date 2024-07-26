@@ -9,16 +9,34 @@ body {
   background-color: #212121;
 }
 
+body::-webkit-scrollbar {
+  width: 2px;
+  /* background-color: #212121; */
+}
+
+body::-webkit-scrollbar-track {
+  background-color: #212121;
+}
+
+body::-webkit-scrollbar-thumb {
+  background-color: #A1C4EB;
+  border-radius: 1px;
+}
+
 header {
+  position: sticky;
+  top: 0px;
   display: flex;
+  background-color: #212121;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
   /* background-color: yellow; */
-  margin-bottom: 25px;
+  padding-bottom: 15px;
+  margin-bottom: 10px;
 }
 
-header > h1 {
+header>h1 {
   color: #A1C4EB;
   padding: 10px 25px 0 25px;
 }
@@ -74,16 +92,19 @@ header > h1 {
   height: 850px;
   margin-bottom: 25px;
 }
+
 .card:hover {
   border: 2px solid #A1C4EB;
   border-radius: 0;
   width: 346px;
   cursor: pointer;
 }
+
 .card img {
   display: flex;
   width: 100%;
 }
+
 .card h2 {
   color: #A1C4EB;
   margin-top: 5px;
@@ -95,10 +116,12 @@ header > h1 {
   margin-left: 5px;
   overflow-y: auto;
 }
+
 .overview::-webkit-scrollbar {
   background-color: #111111;
   /* background-color: #212121; */
 }
+
 .rating {
   margin-top: 10px;
   margin-bottom: 5px;
