@@ -1,0 +1,168 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  width: 1900px;
+  margin: 0 auto;
+  background-color: #212121;
+}
+
+body::-webkit-scrollbar {
+  width: 2px;
+  /* background-color: #212121; */
+}
+
+body::-webkit-scrollbar-track {
+  background-color: #212121;
+}
+
+body::-webkit-scrollbar-thumb {
+  background-color: #A1C4EB;
+  border-radius: 1px;
+}
+
+header {
+  position: sticky;
+  top: 0px;
+  display: flex;
+  background-color: #212121;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  /* background-color: yellow; */
+  padding-bottom: 15px;
+  margin-bottom: 10px;
+}
+
+header>h1 {
+  color: #A1C4EB;
+  padding: 10px 25px 0 25px;
+}
+
+.inputForm {
+  display: flex;
+  flex-direction: row;
+  padding: 10px 25px 0 25px;
+}
+
+#index {
+  color: #A1C4EB;
+  font-size: 15px;
+  padding-left: 7px;
+  background-color: #212121;
+  border: 2px solid #A1C4EB;
+  border-right: 0;
+  width: 400px;
+  height: 30px;
+}
+
+#index:focus {
+  outline: none;
+}
+
+#inputButton {
+  background-color: #A1C4EB;
+  border: 2px solid #A1C4EB;
+  width: 50px;
+  color: #212121;
+  font-size: 15px;
+  font-weight: bolder;
+}
+
+.cardList {
+  width: 1850px;
+  overflow: hidden;
+  margin-left: 25px;
+}
+
+.slider {
+  display: flex;
+}
+
+/* .slider:hover {
+  transform: translate(-1875px);
+} */
+
+.prev {
+  /* display: none; */
+  position: fixed;
+  width: 30px;
+  height: 60px;
+  border: 0;
+  background-color: #212121;
+  opacity: 0.5;
+  font-size: 20px;
+  color: #A1C4EB;
+  top: 425px;
+  left: 37px;
+  z-index: 2;
+}
+
+.next {
+  /* display: none; */
+  position: fixed;
+  width: 30px;
+  height: 60px;
+  border: 0;
+  background-color: #212121;
+  opacity: 0.5;
+  font-size: 20px;
+  color: #A1C4EB;
+  font-size: 20px;
+  top: 425px;
+  right: 37px;
+  z-index: 2;
+}
+
+.card {
+  background-color: #111111;
+  border-radius: 15px;
+  overflow: hidden;
+  /* background-color: #212121; */
+  color: #FFFFFF;
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  justify-content: space-between;
+  border: 2px solid #212121;
+  width: 346px;
+  height: 850px;
+}
+
+.card:hover {
+  border: 2px solid #A1C4EB;
+  border-radius: 0;
+  width: 346px;
+  cursor: pointer;
+}
+
+.card img {
+  display: flex;
+  width: 100%;
+}
+
+.card h2 {
+  color: #A1C4EB;
+  margin-top: 5px;
+  text-align: center;
+}
+
+.overview {
+  margin-top: 10px;
+  margin-left: 5px;
+  overflow-y: auto;
+}
+
+.overview::-webkit-scrollbar {
+  background-color: #111111;
+  /* background-color: #212121; */
+}
+
+.rating {
+  margin-top: 10px;
+  margin-bottom: 5px;
+  margin-left: 10px;
+  color: #A1C4EB;
+}
