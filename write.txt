@@ -70,4 +70,23 @@ defer를 붙이면 된다
 slider에 hover하면 버튼 표시
 <를 누르면 1875px 이동 / 시작이면 시작까지 이동
 >를 누르면 -1875px 이동 / 끝이면 끝까지 이동
+-----------------------------------------------------------------------------------------------
+기존 코드 수정 후 과제 재제출
+급한 수정 사항
+1. form onsubmit 함수 = 엔터 및 button 클릭시 별도의 태그 없이 작동할 수 있다
+    form에 addEventListener(submit ⇒ {event.preventDefault()}) (O)
+2. css에 :root적용
+    안에 변수명으로 색깔 관리 가능 (O)
+3. type=”module”을 넣는다 = 자동으로 지연된다
+    module : 특정 관심사에 해당하는 기능을 수행하는 변수와 함수의 모음
+        각각 script 작성하는 방법도 있다 (문제는 없다)
+        독립적인 scope를 보장하기 위해 module 권장
+        export : 다른 module에서도 사용할 수 있다 (import {getMovies} from “파일 경로”) (O)
 
+추후 고려
+1. input에 제목에 해당하는 검색 값이 없을 때 alert(검색결과 없습니다) 적용
+2. reset.css = 모든 브라우저에서 일관된 스타일로 시작할 수 있게 초기화하는 css파일 (자주 이용)
+    google Css Tools 공식 문서에서 복사
+3. .prettierrc : code formatting (저장하자마자 적용), 없어도 prettier extension이 적용됨
+    파일이 있으면 파일의 설정을 우선시 하여 formatting (github 충돌 방지)
+    extension에서 prettier install, notion에 있는 내용 저장
