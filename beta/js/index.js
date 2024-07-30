@@ -1,12 +1,18 @@
-// arrow.js에 사용할 div 개수
-let length = 0;
-
 // 창이 실행될 때 실행되는 함수
 window.onload = function () {
   // 위치 정보 및 세팅값
+  const cardList = document.querySelector('.cardList');
   const slider = document.querySelector('.slider');
   const inputButton = document.getElementById('inputButton');
   const index = document.getElementById('index');
+  const prev = document.querySelector('.prev');
+  const next = document.querySelector('.next');
+  let length = 0;
+  let count = 0;
+  let move = 0;
+  let size = 1875;
+  let start = 0;
+  let end = (850 * length) + (25 * (length - 1));
   let indexFind = "";
   const options = {
     method: 'GET',
@@ -17,12 +23,14 @@ window.onload = function () {
   };
 
   removeCards(slider);
-  loadCards(slider, options, indexFind);
+  length = loadCards(slider, options, indexFind);
+  console.log(length);
 
   inputButton.addEventListener("click", (e) => {
     indexFind = String(index.value).toLowerCase();
     removeCards(slider);
-    loadCards(slider, options, indexFind);
+    length = loadCards(slider, options, indexFind);
+    console.log(length);
   });
 
   index.addEventListener("keypress", (e) => {
@@ -31,7 +39,39 @@ window.onload = function () {
     if (code === 'Enter' || code === 'NumpadEnter') {
       indexFind = String(index.value).toLowerCase();
       removeCards(slider);
-      loadCards(slider, options, indexFind);
+      length = loadCards(slider, options, indexFind);
+      console.log(length);
+    }
+  });
+
+  cardList.addEventListener("mouseover", () => {
+    prev.style.display = "block";
+    next.style.display = "block";
+  });
+  
+  cardList.addEventListener("mouseout", () => {
+    prev.style.display = "none";
+    next.style.display = "none";
+  });
+
+  prev.addEventListener("click", () => {
+    if(true) {
+      if(count !== 0) {
+        count--;
+      }
+      move = size * count;
+      move = (move < start) ? start : move;
+      slider.style.transform = 'translate(-' + move +'px)';
+    }
+  });
+  
+  next.addEventListener("click", () => {
+    if(count >= 0) {
+      count++;
+      move = size * count;
+      // move = (move < end) ? move : end;
+      console.log(count, end);
+      slider.style.transform = 'translate(-' + move +'px)';
     }
   });
 }
@@ -72,7 +112,9 @@ function loadCards(location, options, string) {
           }
           
         }
-      })
+      });
+    
+      return length;
     })
     .catch(err => console.error(err));
 };

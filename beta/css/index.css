@@ -81,12 +81,8 @@ header>h1 {
   display: flex;
 }
 
-/* .slider:hover {
-  transform: translate(-1875px);
-} */
-
 .prev {
-  /* display: none; */
+  display: none;
   position: fixed;
   width: 30px;
   height: 60px;
@@ -97,11 +93,11 @@ header>h1 {
   color: #A1C4EB;
   top: 425px;
   left: 37px;
-  z-index: 2;
+  z-index: 1;
 }
 
 .next {
-  /* display: none; */
+  display: none;
   position: fixed;
   width: 30px;
   height: 60px;
@@ -113,7 +109,15 @@ header>h1 {
   font-size: 20px;
   top: 425px;
   right: 37px;
-  z-index: 2;
+  z-index: 1;
+}
+
+.slider:hover ~ .prev {
+  display: block;
+}
+
+.slider:hover ~ .next {
+  display: block;
 }
 
 .card {
