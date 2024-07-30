@@ -86,7 +86,24 @@ slider에 hover하면 버튼 표시
 추후 고려
 1. input에 제목에 해당하는 검색 값이 없을 때 alert(검색결과 없습니다) 적용
 2. reset.css = 모든 브라우저에서 일관된 스타일로 시작할 수 있게 초기화하는 css파일 (자주 이용)
-    google Css Tools 공식 문서에서 복사
+    google Css Tools 공식 문서에서 복사 (O)
 3. .prettierrc : code formatting (저장하자마자 적용), 없어도 prettier extension이 적용됨
     파일이 있으면 파일의 설정을 우선시 하여 formatting (github 충돌 방지)
     extension에서 prettier install, notion에 있는 내용 저장
+
+
+- [O]  순수 바닐라 자바스크립트 사용
+- [O]  TMDB API 사용하여 데이터 가져오기
+- [O]  영화 카드리스트 UI 구현
+- [O]  영화 검색 UI 구현
+- [O]  const, let 만을 이용한 변수 선언
+- [O]  화살표 함수 사용
+- [O]  배열 메소드 2개 이상 사용 : reduce, filter
+- [O]  DOM 제어 API 2개 이상 사용: getElementsByClassName, innerHTML
+
+- [O]  display flex 사용: 영화 카드
+- [ ]  display grid 사용: 영화 카드 리스트
+- [O]  대소문자 관계없이 검색 가능
+- [O]  검색 결과 없을 때 예외 처리
+- [O]  reset.css 로 기본 스타일 제거
+- [ ]  .prettierrc 적용 : 모든 팀원들이 동일한 포맷으로 작업가능
